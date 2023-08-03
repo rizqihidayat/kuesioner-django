@@ -1,0 +1,2140 @@
+{% load static %}
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Smart Survey</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
+        <link href="{% static 'kuesioner/css/styles.css' %}" rel="stylesheet" />
+        <link rel="icon" type="image/x-icon" href="{% static 'kuesioner/assets/img/soluntika-kecil88.png' %}" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="nav-fixed">
+        <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
+            <!-- Sidenav Toggle Button-->
+            <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i data-feather="menu"></i></button>
+            <!-- Navbar Brand-->
+            <!-- * * Tip * * You can use text or an image for your navbar brand.-->
+            <!-- * * * * * * When using an image, we recommend the SVG format.-->
+            <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
+            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">Smart Survey</a>
+            <!-- Navbar Search Input-->
+            <!-- * * Note: * * Visible only on and above the lg breakpoint-->
+            <form class="form-inline me-auto d-none d-lg-block me-3">
+                <div class="input-group input-group-joined input-group-solid">
+                    <input class="form-control pe-0" type="search" placeholder="Search" aria-label="Search" />
+                    <div class="input-group-text"><i data-feather="search"></i></div>
+                </div>
+            </form>
+            <!-- Navbar Items-->
+            <ul class="navbar-nav align-items-center ms-auto">
+                <!-- Documentation Dropdown-->
+                <li class="nav-item dropdown no-caret d-none d-md-block me-3">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="fw-500">Documentation</div>
+                        <i class="fas fa-chevron-right dropdown-arrow"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end py-0 me-sm-n15 me-lg-0 o-hidden animated--fade-in-up" aria-labelledby="navbarDropdownDocs">
+                        <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro" target="_blank">
+                            <div class="icon-stack bg-primary-soft text-primary me-4"><i data-feather="book"></i></div>
+                            <div>
+                                <div class="small text-gray-500">Documentation</div>
+                                Usage instructions and reference
+                            </div>
+                        </a>
+                        <div class="dropdown-divider m-0"></div>
+                        <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro/components" target="_blank">
+                            <div class="icon-stack bg-primary-soft text-primary me-4"><i data-feather="code"></i></div>
+                            <div>
+                                <div class="small text-gray-500">Components</div>
+                                Code snippets and reference
+                            </div>
+                        </a>
+                        <div class="dropdown-divider m-0"></div>
+                        <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro/changelog" target="_blank">
+                            <div class="icon-stack bg-primary-soft text-primary me-4"><i data-feather="file-text"></i></div>
+                            <div>
+                                <div class="small text-gray-500">Changelog</div>
+                                Updates and changes
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <!-- Navbar Search Dropdown-->
+                <!-- * * Note: * * Visible only below the lg breakpoint-->
+                <li class="nav-item dropdown no-caret me-3 d-lg-none">
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="searchDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="search"></i></a>
+                    <!-- Dropdown - Search-->
+                    <div class="dropdown-menu dropdown-menu-end p-3 shadow animated--fade-in-up" aria-labelledby="searchDropdown">
+                        <form class="form-inline me-auto w-100">
+                            <div class="input-group input-group-joined input-group-solid">
+                                <input class="form-control pe-0" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                                <div class="input-group-text"><i data-feather="search"></i></div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                <!-- Alerts Dropdown-->
+                <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="bell"></i></a>
+                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
+                        <h6 class="dropdown-header dropdown-notifications-header">
+                            <i class="me-2" data-feather="bell"></i>
+                            Alerts Center
+                        </h6>
+                        <!-- Example Alert 1-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <div class="dropdown-notifications-item-icon bg-warning"><i data-feather="activity"></i></div>
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-details">December 29, 2021</div>
+                                <div class="dropdown-notifications-item-content-text">This is an alert message. It's nothing serious, but it requires your attention.</div>
+                            </div>
+                        </a>
+                        <!-- Example Alert 2-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <div class="dropdown-notifications-item-icon bg-info"><i data-feather="bar-chart"></i></div>
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-details">December 22, 2021</div>
+                                <div class="dropdown-notifications-item-content-text">A new monthly report is ready. Click here to view!</div>
+                            </div>
+                        </a>
+                        <!-- Example Alert 3-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <div class="dropdown-notifications-item-icon bg-danger"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-details">December 8, 2021</div>
+                                <div class="dropdown-notifications-item-content-text">Critical system failure, systems shutting down.</div>
+                            </div>
+                        </a>
+                        <!-- Example Alert 4-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <div class="dropdown-notifications-item-icon bg-success"><i data-feather="user-plus"></i></div>
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-details">December 2, 2021</div>
+                                <div class="dropdown-notifications-item-content-text">New user request. Woody has requested access to the organization.</div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item dropdown-notifications-footer" href="#!">View All Alerts</a>
+                    </div>
+                </li>
+                <!-- Messages Dropdown-->
+                <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownMessages" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail"></i></a>
+                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownMessages">
+                        <h6 class="dropdown-header dropdown-notifications-header">
+                            <i class="me-2" data-feather="mail"></i>
+                            Message Center
+                        </h6>
+                        <!-- Example Message 1  -->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <img class="dropdown-notifications-item-img" src="{% static 'kuesioner/assets/img/profile-2' %}" />
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                                <div class="dropdown-notifications-item-content-details">Thomas Wilcox · 58m</div>
+                            </div>
+                        </a>
+                        <!-- Example Message 2-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <img class="dropdown-notifications-item-img" src="{% static 'kuesioner/assets/img/profile-3' %}" />
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                                <div class="dropdown-notifications-item-content-details">Emily Fowler · 2d</div>
+                            </div>
+                        </a>
+                        <!-- Example Message 3-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <img class="dropdown-notifications-item-img" src="{% static 'kuesioner/assets/img/profile-4' %}" />
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                                <div class="dropdown-notifications-item-content-details">Marshall Rosencrantz · 3d</div>
+                            </div>
+                        </a>
+                        <!-- Example Message 4-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <img class="dropdown-notifications-item-img" src="{% static 'kuesioner/assets/img/profile-5' %}" />
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                                <div class="dropdown-notifications-item-content-details">Colby Newton · 3d</div>
+                            </div>
+                        </a>
+                        <!-- Footer Link-->
+                        <a class="dropdown-item dropdown-notifications-footer" href="#!">Read All Messages</a>
+                    </div>
+                </li>
+                <!-- User Dropdown-->
+                <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <!-- <img class="img-fluid" src="{% static 'kuesioner/assets/img/illustrations/profiles/profile-1.png' %}" /> -->
+                        <!-- Profile picture image-->
+                        {% if user_data_obj.profile_picture %}
+                        <img class="img-fluid" src="{{ user_data_obj.profile_picture.url }}" alt="" />
+                        {% else %}
+                        <!-- Default profile picture -->
+                            <img class="img-fluid" src="{% static 'kuesioner/assets/img/illustrations/profiles/profile-1.png' %}" alt="" />
+                        {% endif %}
+                        <!-- Profile picture help block-->
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
+                        <h6 class="dropdown-header d-flex align-items-center">
+                            <!-- Profile picture image-->
+                            {% if user_data_obj.profile_picture %}
+                            <img class="dropdown-user-img" src="{{ user_data_obj.profile_picture.url }}" alt="" />
+                            {% else %}
+                            <!-- Default profile picture -->
+                                <img class="dropdown-user-img" src="{% static 'kuesioner/assets/img/illustrations/profiles/profile-1.png' %}" alt="" />
+                            {% endif %}
+                            <!-- Profile picture help block-->
+                            <!-- <img class="dropdown-user-img" src="{% static 'kuesioner/assets/img/illustrations/profiles/profile-1.png' %}" /> -->
+                            <div class="dropdown-user-details">
+                                <div class="dropdown-user-details-name">{{ user.first_name }} {{ user.last_name }}</div>
+                                <div class="dropdown-user-details-email">{{ user.email }}</div>
+                            </div>
+                        </h6>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'admin_logout' %}">
+                            <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
+                            Keluar
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sidenav shadow-right sidenav-light">
+                    <div class="sidenav-menu">
+                        <div class="nav accordion" id="accordionSidenav">
+                            <!-- Sidenav Menu Heading (Account)-->
+                            <!-- * * Note: * * Visible only on and above the sm breakpoint-->
+                            <div class="sidenav-menu-heading d-sm-none">Account</div>
+                            <!-- Sidenav Link (Alerts)-->
+                            <!-- * * Note: * * Visible only on and above the sm breakpoint-->
+                            <a class="nav-link d-sm-none" href="#!">
+                                <div class="nav-link-icon"><i data-feather="bell"></i></div>
+                                Alerts
+                                <span class="badge bg-warning-soft text-warning ms-auto">4 New!</span>
+                            </a>
+                            <!-- Sidenav Link (Messages)-->
+                            <!-- * * Note: * * Visible only on and above the sm breakpoint-->
+                            <a class="nav-link d-sm-none" href="#!">
+                                <div class="nav-link-icon"><i data-feather="mail"></i></div>
+                                Messages
+                                <span class="badge bg-success-soft text-success ms-auto">2 New!</span>
+                            </a>
+                            <!-- Sidenav Menu Heading (Core)-->
+                            <div class="sidenav-menu-heading">Core</div>
+                            <!-- Sidenav Accordion (Dashboard)-->
+                            <a class="nav-link active" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="true" aria-controls="collapseDashboards">
+                                <div class="nav-link-icon"><i data-feather="activity"></i></div>
+                                Dashboards
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                              </a>
+                              <div class="collapse show" id="collapseDashboards" data-bs-parent="#accordionSidenavAppsMenu">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                                  <a class="nav-link" href="{% url 'dashboard' %}">
+                                    Dashboard
+                                    <!-- <span class="badge bg-primary-soft text-primary ms-auto">Updated</span> -->
+                                  </a>
+                                  <a class="nav-link active" href="{% url 'dashboard2' %}">Index</a>
+                                  <a class="nav-link" href="{% url 'dashboard3' %}">Komentar & Saran</a>
+                                </nav>
+                              </div>
+                              
+                              <div class="sidenav-menu-heading">User Management</div>
+                              
+                              <!-- Sidenav Accordion (User Management) -->
+                              <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseUserManagement" aria-expanded="false" aria-controls="collapseUserManagement">
+                                <div class="nav-link-icon"><i data-feather="user"></i></div>
+                                User Management
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                              </a>
+                              <div class="collapse" id="collapseUserManagement" data-bs-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavUserManagement">
+                                  <a class="nav-link" href="{% url 'participant_list' %}">Participant List</a>
+                                  <a class="nav-link" href="{% url 'add_participant' %}">Add Participant</a>
+                                  <a class="nav-link" href="{% url 'jabatan_list' %}">Progress</a>
+                                  <a class="nav-link" href="dashboard-3.html">Raw Data</a>
+                                </nav>
+                              </div>
+                              
+                              <div class="sidenav-menu-heading">Manage Kuesioner</div>
+                              
+                              <!-- Sidenav Accordion (Manage Kuesioner) -->
+                              <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseManageKuesioner" aria-expanded="false" aria-controls="collapseManageKuesioner">
+                                <div class="nav-link-icon"><i data-feather="book-open"></i></div>
+                                Manage Kuesioner
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                              </a>
+                              <div class="collapse" id="collapseManageKuesioner" data-bs-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavManageKuesioner">
+                                  <a class="nav-link" href="{% url 'manage_kuesioner' %}">Kuesioner</a>
+                                  <a class="nav-link" href="{% url 'add_kuesioner' %}">Add Kuesioner</a>
+                                </nav>
+                              </div>
+                              <div class="collapse" id="collapsePages" data-bs-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
+                                  <div class="collapse" id="pagesCollapseAuth" data-bs-parent="#accordionSidenavPagesMenu">
+                                    <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesAuth">
+                                    </nav>
+                                  </div>
+                                </nav>
+                              </div>
+                              
+                              <div class="collapse" id="collapseApps" data-bs-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavAppsMenu">
+                                </nav>
+                              </div>
+                              
+                              <div class="collapse" id="collapseLayouts" data-bs-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
+                                </nav>
+                              </div>
+                            </div>
+                          </div>
+                    <!-- Sidenav Footer-->
+                    <div class="sidenav-footer">
+                        <div class="sidenav-footer-content">
+                            <div class="sidenav-footer-subtitle">Logged in as:</div>
+                            <div class="sidenav-footer-title">{{ user.first_name }} {{ user.last_name }}</div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+                        <div class="container-xl px-4">
+                            <div class="page-header-content pt-4">
+                                <div class="row align-items-center justify-content-between">
+                                    <div class="col-auto mt-4">
+                                        <h1 class="page-header-title">
+                                            <div class="page-header-icon"><i data-feather="activity"></i></div>
+                                            Employee Satisfaction Indicator
+                                        </h1>
+                                        <div class="page-header-subtitle">Dashboard ESI</div>
+                                    </div>
+                                    <div class="col-12 col-xl-auto mt-4">
+                                        <div class="input-group input-group-joined border-0" style="width: 16.5rem">
+                                            <span class="input-group-text"><i class="text-primary" data-feather="calendar"></i></span>
+                                            <input class="form-control ps-0 pointer" id="litepickerRangePlugin" placeholder="Select date range..." />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <!-- Main page content-->
+                    <div class="container-xl px-4 mt-n10">
+                        <!-- Colored Cards for Dashboard Demo -->
+                        <div class="row">
+                            <div class="col-lg-6 col-xl-3 mb-4">
+                                <div class="card bg-primary text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="me-3">
+                                                <div class="text-white-75 small">Total Responden</div>
+                                                <div class="text-lg fw-bold">{{total_count}}</div>
+                                            </div>
+                                            <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                                        <a class="text-white stretched-link" href="#!">View Report</a>
+                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-3 mb-4">
+                                <div class="card bg-warning text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="me-3">
+                                                <div class="text-white-75 small">ESI Dimensi</div>
+                                                <div class="text-lg fw-bold">{{avg_score_difference1}}</div>
+                                            </div>
+                                            <i class="feather-xl text-white-50" data-feather="dollar-sign"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                                        <a class="text-white stretched-link" href="#!">View Report</a>
+                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-3 mb-4">
+                                <div class="card bg-success text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="me-3">
+                                                <div class="text-white-75 small">Lvl Kepuasan Kepuasan</div>
+                                                <div class="text-lg fw-bold">{{avg_score_difference}}</div>
+                                            </div>
+                                            <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                                        <a class="text-white stretched-link" href="#!">View Tasks</a>
+                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-3 mb-4">
+                                <div class="card bg-danger text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="me-3">
+                                                <div class="text-white-75 small">Employee Satisfaction</div>
+                                                <div class="text-lg fw-bold">{{avg_score_difference}}</div>
+                                            </div>
+                                            <i class="feather-xl text-white-50" data-feather="message-circle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                                        <a class="text-white stretched-link" href="#!">View Requests</a>
+                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Example Charts for Dashboard ESI Per Dimensi -->
+                        <div class="row">
+                             <!-- Example Charts for Dashboard ESI Per Dimensi -->
+                            <div class="col-xl-6 mb-4">
+                                <div class="card card-header-actions h-100">
+                                    <div class="card-header">
+                                        ESI Per Dimensi
+                                        <div class="dropdown no-caret">
+                                            <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
+                                            <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    Tertinggi
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    Terendah
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% comment %} {% if proactive_scores %} {% endcomment %}
+                                    <div class="card-body">
+                                        <h4 class="small">
+                                            Proactive
+                                            <span class="float-end fw-bold">{{ proactive_scores.0.average_score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ proactive_scores.0.average_score_difference }}%" aria-valuenow="{{ proactive_scores.0.average_score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% comment %} {% endif %} {% endcomment %}
+                                        {% if innovative_scores %}
+                                        <h4 class="small">
+                                            Innovative
+                                            <span class="float-end fw-bold">{{ innovative_scores.0.average_score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{ innovative_scores.0.average_score_difference }}%" aria-valuenow="{{ innovactive_scores.0.average_score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if collab_scores %}
+                                        <h4 class="small">
+                                            Coordination & Collaboration
+                                            <span class="float-end fw-bold">{{ collab_scores.0.average_score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: {{ collab_scores.0.average_score_difference }}" aria-valuenow="{{ collab_scores.0.average_score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if pay_scores %}
+                                        <h4 class="small">
+                                            Pay & Benefit
+                                            <span class="float-end fw-bold">{{ pay_scores.0.average_score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar info" role="progressbar" style="width: {{ pay_scores.0.average_score_difference }}%" aria-valuenow="{{ pay_scores.0.average_score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if safety_scores %}
+                                        <h4 class="small">
+                                            Safety & Healty Environtment
+                                            <span class="float-end fw-bold">{{ safety_scores.0.average_score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ safety_scores.0.average_score_difference }}%" aria-valuenow="{{ safety_scores.0.average_score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if wlb_scores %}
+                                        <h4 class="small">
+                                            Work Life Balance
+                                            <span class="float-end fw-bold">{{ wlb_scores.0.average_score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ wlb_scores.0.average_score_difference }}%" aria-valuenow="{{ wlb_scores.0.average_score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if jobsecur_scores %}
+                                        <h4 class="small">
+                                            Job Security
+                                            <span class="float-end fw-bold">{{ jobsecur_scores.0.average_score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{ jobsecur_scores.0.average_score_difference }}%" aria-valuenow="{{ jobsecur_scores.0.average_score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if workinfra_scores %}
+                                        <h4 class="small">
+                                            Work Infrastructure
+                                            <span class="float-end fw-bold">{{ workinfra_scores.0.average_score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar" role="progressbar" style="width: {{ workinfra_scores.0.average_score_difference }}%" aria-valuenow="{{ workinfra_scores.0.average_score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if seniorlead_scores %}
+                                        <h4 class="small">
+                                            Senior Leadership
+                                            <span class="float-end fw-bold">{{ seniorlead_scores.0.average_score_difference }}</span>
+                                        </h4></span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: {{ seniorlead_scores.0.average_score_difference }}%" aria-valuenow="{{ seniorlead_scores.0.average_score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if perfom_scores %}
+                                        <h4 class="small">
+                                            Performance Management
+                                            <span class="float-end fw-bold">{{ perfom_scores.0.average_score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ perfom_scores.0.average_score_difference }}%" aria-valuenow="{{ perfom_scores.0.average_score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if career_scores %}
+                                        <h4 class="small">
+                                            Career & Development
+                                            <span class="float-end fw-bold">{{ career_scores.0.average_score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{ career_scores.0.average_score_difference }}%" aria-valuenow="{{ career_scores.0.average_score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if reward_scores %}
+                                        <h4 class="small">
+                                            Reward & Recognition
+                                            <span class="float-end fw-bold">{{ reward_scores.0.average_score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar" role="progressbar" style="width: {{ reward_scores.0.average_score_difference }}%" aria-valuenow="{{ reward_scores.0.average_score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if reputation_scores %}
+                                        <h4 class="small">
+                                            Reputation
+                                            <span class="float-end fw-bold">{{ reputation_scores.0.average_score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: {{ reputation_scores.0.average_score_difference }}%" aria-valuenow="{{ reputation_scores.0.average_score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Dashboard ESI Per Dimensi -->
+                            <!-- Dashboard ESI Overall Company - Per Wilayah -->
+                            <div class="col-xl-6 mb-4">
+                                <div class="card card-header-actions h-100">
+                                    <div class="card-header">
+                                        Lvl Kepuasan
+                                        <div class="dropdown no-caret">
+                                            <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
+                                            <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="areaChartDropdownExample">
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    Kantor pusat, Gudang Persediaan, Unit Kesehatan, dan Pendidikan latihan
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    DAOP I Jakarta
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    DAOP II Bandung
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    DAOP III Cirebon
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    DAOP IV Semarang
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    DAOP V Purwokerto
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    DAOP VI Yogyakarta
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    DAOP VII Madiun
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    DAOP VIII Surabaya
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    DAOP IX Jember
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    LRT JABODEBEK
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    DIVRE I Sumatra Utara & SUBDIVRE I.1 Aceh
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    DIVRE II Sumatra Barat
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    DIVRE III Palembang
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    DIVRE IV Tanjungkarang
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    Balai Yass Lahat
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    Balai Yass Pulubrayan
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    Balai Yass Surabaya Gubeng
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    Balai Yass Tegal
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    Balai Yass Yogyakarta
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if updated_scores1 %}
+                                    {% for score in updated_scores1 %}
+                                    <div class="card-body">
+                                        <h4 class="small">
+                                            {{ score.lvl_kepuasan }}</li>
+                                            <span class="float-end fw-bold">{{ score.score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ score.score_difference }}%" aria-valuenow="{{ score.score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% if updated_scores2 %}
+                                        {% for score in updated_scores2 %}
+                                        <h4 class="small">
+                                            {{ score.lvl_kepuasan }}
+                                            <span class="float-end fw-bold">{{ score.score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{ score.score_difference }}%" aria-valuenow="{{ score.score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% if updated_scores3 %}
+                                        {% for score in updated_scores3 %}
+                                        <h4 class="small">
+                                            {{ score.lvl_kepuasan }}
+                                            <span class="float-end fw-bold">{{ score.score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar" role="progressbar" style="width: {{ score.score_difference }}%" aria-valuenow="{{ score.score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% if updated_scores4 %}
+                                        {% for score in updated_scores4 %}
+                                        <h4 class="small">
+                                            {{ score.lvl_kepuasan }}
+                                            <span class="float-end fw-bold">{{ score.score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: {{ score.score_difference }}%" aria-valuenow="{{ score.score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% if updated_scores5 %}
+                                        {% for score in updated_scores5 %}
+                                        <h4 class="small">
+                                            {{ score.lvl_kepuasan }}
+                                            <span class="float-end fw-bold">{{ score.score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ score.score_difference }}%" aria-valuenow="{{ score.score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% if updated_scores6 %}
+                                        {% for score in updated_scores6 %}
+                                        <h4 class="small">
+                                            {{ score.lvl_kepuasan }}
+                                            <span class="float-end fw-bold">{{ score.score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ score.score_difference }}%" aria-valuenow="{{ score.score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% if updated_scores7 %}
+                                        {% for score in updated_scores7 %}
+                                        <h4 class="small">
+                                            {{ score.lvl_kepuasan }}
+                                            <span class="float-end fw-bold">{{ score.score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{ score.score_difference }}%" aria-valuenow="{{ score.score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% if updated_scores8 %}
+                                        {% for score in updated_scores8 %}
+                                        <h4 class="small">
+                                            {{ score.lvl_kepuasan }}
+                                            <span class="float-end fw-bold">{{ score.score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar" role="progressbar" style="width: {{ score.score_difference }}%" aria-valuenow="{{ score.score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% if updated_scores9 %}
+                                        {% for score in updated_scores9 %}
+                                        <h4 class="small">
+                                            {{ score.lvl_kepuasan }}
+                                            <span class="float-end fw-bold">{{ score.score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ score.score_difference }}%" aria-valuenow="{{ score.score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% if updated_scores10 %}
+                                        {% for score in updated_scores10 %}
+                                        <h4 class="small">
+                                            {{ score.lvl_kepuasan }}
+                                            <span class="float-end fw-bold">{{ score.score_difference }}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ score.score_difference }}%" aria-valuenow="{{ score.score_difference }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Main page content-->
+                    <div class="container-xl px-4 mt-4">
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <!-- Profile picture card-->
+                                <div class="card mb-4 mb-xl-0">
+                                    <div class="card-header">ESI Per Dimensi</div>
+                                    <div class="card-body text-center">
+                                        <div class="mb-3">
+                                            {% comment %} <label class="small mb-1">Group(s)</label> {% endcomment %}
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Pendidikan</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="Pendidikan" selected>All</option>
+                                                    <option value="Pendidikan" >SD</option>
+                                                    <option value="registered">SLTP</option>
+                                                    <option value="edtior">SLTA</option>
+                                                    <option value="guest">Diploma</option>
+                                                    <option value="guest">Sarjana</option>
+                                                    <option value="guest">Pasca Sarjana</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Lokasi Penempatan</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="Pendidikan" selected>All</option>
+                                                    <option value="administrator" >Grup Head/Executive Vice President</option>
+                                                    <option value="registered">General Manager/Vice President</option>
+                                                    <option value="edtior">Senior Manajer/Manajer</option>
+                                                    <option value="guest">Junior Manajer</option>
+                                                    <option value="guest">Asisten Manajer</option>
+                                                    <option value="guest">Senior Supervisor</option>
+                                                    <option value="guest">Supervisor</option>
+                                                    <option value="guest">Junior Supervisor</option>
+                                                    <option value="guest">Pelaksana</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Usia</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="administrator" selected>All</option>
+                                                    <option value="administrator" >Gen X (39 -54 th)</option>
+                                                    <option value="registered">Gen Y ( 25 -38 Th)</option>
+                                                    <option value="edtior">Gen Z (< 24 Th)</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Jenis Kelamin</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="administrator" selected>All</option>
+                                                    <option value="registered">Perempuan</option>
+                                                    <option value="edtior">Laki Laki</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Jenis Jabatan</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="administrator" selected>All</option>
+                                                    <option value="registered">Managerial</option>
+                                                    <option value="edtior">Specialist</option>
+                                                    <option value="guest">Technical</option>
+                                                    <option value="guest">Administrative</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Tingkat Jabatan</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="administrator" selected>All</option>
+                                                    <option value="administrator" >Grup Head/Executive Vice President</option>
+                                                    <option value="registered">General Manager/Vice President</option>
+                                                    <option value="edtior">Senior Manajer/Manajer</option>
+                                                    <option value="guest">Junior Manajer</option>
+                                                    <option value="guest">Asisten Manajer</option>
+                                                    <option value="guest">Senior Supervisor</option>
+                                                    <option value="guest">Supervisor</option>
+                                                    <option value="guest">Junior Supervisor</option>
+                                                    <option value="guest">Pelaksana</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Bidang Pekerjaan/ Korsa</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="administrator" selected>All</option>
+                                                    <option value="administrator" >Utama</option>
+                                                    <option value="registered">Niaga</option>
+                                                    <option value="edtior">Operasi</option>
+                                                    <option value="guest">Pengelolaan Prasarana</option>
+                                                    <option value="guest">Keselamatan & Keamanan</option>
+                                                    <option value="guest">SDM & Umum</option>
+                                                    <option value="guest">Perencanaan Strategis & Pengembangan Usaha</option>
+                                                    <option value="guest">Keuangan</option>
+                                                </select>
+                                            </div>
+                                            <!-- Submit button-->
+                                            <button class="btn btn-primary" type="button">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-8">
+                                <!-- Account details card-->
+                                <div class="card mb-4">
+                                    <div class="card-header">ESI Details</div>
+                                    <div class="card-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-xl px-4 mt-4">
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <!-- Profile picture card-->
+                                <div class="card mb-4 mb-xl-0">
+                                    <div class="card-header">Level Kepuasan</div>
+                                    <div class="card-body text-center">
+                                        <div class="mb-3">
+                                            {% comment %} <label class="small mb-1">Group(s)</label> {% endcomment %}
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Pendidikan</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="Pendidikan" selected>All</option>
+                                                    <option value="Pendidikan" >SD</option>
+                                                    <option value="registered">SLTP</option>
+                                                    <option value="edtior">SLTA</option>
+                                                    <option value="guest">Diploma</option>
+                                                    <option value="guest">Sarjana</option>
+                                                    <option value="guest">Pasca Sarjana</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Lokasi Penempatan</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="Pendidikan" selected>All</option>
+                                                    <option value="administrator" >Grup Head/Executive Vice President</option>
+                                                    <option value="registered">General Manager/Vice President</option>
+                                                    <option value="edtior">Senior Manajer/Manajer</option>
+                                                    <option value="guest">Junior Manajer</option>
+                                                    <option value="guest">Asisten Manajer</option>
+                                                    <option value="guest">Senior Supervisor</option>
+                                                    <option value="guest">Supervisor</option>
+                                                    <option value="guest">Junior Supervisor</option>
+                                                    <option value="guest">Pelaksana</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Usia</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="administrator" selected>All</option>
+                                                    <option value="administrator" >Gen X (39 -54 th)</option>
+                                                    <option value="registered">Gen Y ( 25 -38 Th)</option>
+                                                    <option value="edtior">Gen Z (< 24 Th)</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Jenis Kelamin</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="administrator" selected>All</option>
+                                                    <option value="registered">Perempuan</option>
+                                                    <option value="edtior">Laki Laki</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Jenis Jabatan</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="administrator" selected>All</option>
+                                                    <option value="registered">Managerial</option>
+                                                    <option value="edtior">Specialist</option>
+                                                    <option value="guest">Technical</option>
+                                                    <option value="guest">Administrative</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Tingkat Jabatan</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="administrator" selected>All</option>
+                                                    <option value="administrator" >Grup Head/Executive Vice President</option>
+                                                    <option value="registered">General Manager/Vice President</option>
+                                                    <option value="edtior">Senior Manajer/Manajer</option>
+                                                    <option value="guest">Junior Manajer</option>
+                                                    <option value="guest">Asisten Manajer</option>
+                                                    <option value="guest">Senior Supervisor</option>
+                                                    <option value="guest">Supervisor</option>
+                                                    <option value="guest">Junior Supervisor</option>
+                                                    <option value="guest">Pelaksana</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Bidang Pekerjaan/ Korsa</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>Select a role:</option>
+                                                    <option value="administrator" selected>All</option>
+                                                    <option value="administrator" >Utama</option>
+                                                    <option value="registered">Niaga</option>
+                                                    <option value="edtior">Operasi</option>
+                                                    <option value="guest">Pengelolaan Prasarana</option>
+                                                    <option value="guest">Keselamatan & Keamanan</option>
+                                                    <option value="guest">SDM & Umum</option>
+                                                    <option value="guest">Perencanaan Strategis & Pengembangan Usaha</option>
+                                                    <option value="guest">Keuangan</option>
+                                                </select>
+                                            </div>
+                                            <!-- Submit button-->
+                                            <button class="btn btn-primary" type="button">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-8">
+                                <!-- Account details card-->
+                                <div class="card mb-4">
+                                    <div class="card-header">Level Kepuasan Detail</div>
+                                    <div class="card-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                            <!-- End of Dashboard ESI Overall Company - Per Wilayah -->
+                        </div>
+                        <!-- end row ESI -->
+                        <!-- end of row -->
+                        <!-- start row -->
+                        <!-- end row -->
+                        <!-- start row -->
+                        <!-- end row -->
+                        <!-- Example DataTable for Dashboard Demo-->
+                        <!-- <div class="card mb-4">
+                            <div class="card-header">Personnel Management</div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect</td>
+                                            <td>Edinburgh</td>
+                                            <td>61</td>
+                                            <td>2011/04/25</td>
+                                            <td>$320,800</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Garrett Winters</td>
+                                            <td>Accountant</td>
+                                            <td>Tokyo</td>
+                                            <td>63</td>
+                                            <td>2011/07/25</td>
+                                            <td>$170,750</td>
+                                            <td><div class="badge bg-warning rounded-pill">Pending</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ashton Cox</td>
+                                            <td>Junior Technical Author</td>
+                                            <td>San Francisco</td>
+                                            <td>66</td>
+                                            <td>2009/01/12</td>
+                                            <td>$86,000</td>
+                                            <td><div class="badge bg-secondary text-white rounded-pill">Part-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cedric Kelly</td>
+                                            <td>Senior Javascript Developer</td>
+                                            <td>Edinburgh</td>
+                                            <td>22</td>
+                                            <td>2012/03/29</td>
+                                            <td>$433,060</td>
+                                            <td><div class="badge bg-info rounded-pill">Contract</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Airi Satou</td>
+                                            <td>Accountant</td>
+                                            <td>Tokyo</td>
+                                            <td>33</td>
+                                            <td>2008/11/28</td>
+                                            <td>$162,700</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Brielle Williamson</td>
+                                            <td>Integration Specialist</td>
+                                            <td>New York</td>
+                                            <td>61</td>
+                                            <td>2012/12/02</td>
+                                            <td>$372,000</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Herrod Chandler</td>
+                                            <td>Sales Assistant</td>
+                                            <td>San Francisco</td>
+                                            <td>59</td>
+                                            <td>2012/08/06</td>
+                                            <td>$137,500</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rhona Davidson</td>
+                                            <td>Integration Specialist</td>
+                                            <td>Tokyo</td>
+                                            <td>55</td>
+                                            <td>2010/10/14</td>
+                                            <td>$327,900</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Colleen Hurst</td>
+                                            <td>Javascript Developer</td>
+                                            <td>San Francisco</td>
+                                            <td>39</td>
+                                            <td>2009/09/15</td>
+                                            <td>$205,500</td>
+                                            <td><div class="badge bg-info rounded-pill">Contract</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sonya Frost</td>
+                                            <td>Software Engineer</td>
+                                            <td>Edinburgh</td>
+                                            <td>23</td>
+                                            <td>2008/12/13</td>
+                                            <td>$103,600</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jena Gaines</td>
+                                            <td>Office Manager</td>
+                                            <td>London</td>
+                                            <td>30</td>
+                                            <td>2008/12/19</td>
+                                            <td>$90,560</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Quinn Flynn</td>
+                                            <td>Support Lead</td>
+                                            <td>Edinburgh</td>
+                                            <td>22</td>
+                                            <td>2013/03/03</td>
+                                            <td>$342,000</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Charde Marshall</td>
+                                            <td>Regional Director</td>
+                                            <td>San Francisco</td>
+                                            <td>36</td>
+                                            <td>2008/10/16</td>
+                                            <td>$470,600</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Haley Kennedy</td>
+                                            <td>Senior Marketing Designer</td>
+                                            <td>London</td>
+                                            <td>43</td>
+                                            <td>2012/12/18</td>
+                                            <td>$313,500</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tatyana Fitzpatrick</td>
+                                            <td>Regional Director</td>
+                                            <td>London</td>
+                                            <td>19</td>
+                                            <td>2010/03/17</td>
+                                            <td>$385,750</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Michael Silva</td>
+                                            <td>Marketing Designer</td>
+                                            <td>London</td>
+                                            <td>66</td>
+                                            <td>2012/11/27</td>
+                                            <td>$198,500</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Paul Byrd</td>
+                                            <td>Chief Financial Officer (CFO)</td>
+                                            <td>New York</td>
+                                            <td>64</td>
+                                            <td>2010/06/09</td>
+                                            <td>$725,000</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gloria Little</td>
+                                            <td>Systems Administrator</td>
+                                            <td>New York</td>
+                                            <td>59</td>
+                                            <td>2009/04/10</td>
+                                            <td>$237,500</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bradley Greer</td>
+                                            <td>Software Engineer</td>
+                                            <td>London</td>
+                                            <td>41</td>
+                                            <td>2012/10/13</td>
+                                            <td>$132,000</td>
+                                            <td><div class="badge bg-warning rounded-pill">Pending</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dai Rios</td>
+                                            <td>Personnel Lead</td>
+                                            <td>Edinburgh</td>
+                                            <td>35</td>
+                                            <td>2012/09/26</td>
+                                            <td>$217,500</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jenette Caldwell</td>
+                                            <td>Development Lead</td>
+                                            <td>New York</td>
+                                            <td>30</td>
+                                            <td>2011/09/03</td>
+                                            <td>$345,000</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Yuri Berry</td>
+                                            <td>Chief Marketing Officer (CMO)</td>
+                                            <td>New York</td>
+                                            <td>40</td>
+                                            <td>2009/06/25</td>
+                                            <td>$675,000</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Caesar Vance</td>
+                                            <td>Pre-Sales Support</td>
+                                            <td>New York</td>
+                                            <td>21</td>
+                                            <td>2011/12/12</td>
+                                            <td>$106,450</td>
+                                            <td><div class="badge bg-secondary text-white rounded-pill">Part-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Doris Wilder</td>
+                                            <td>Sales Assistant</td>
+                                            <td>Sidney</td>
+                                            <td>23</td>
+                                            <td>2010/09/20</td>
+                                            <td>$85,600</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Angelica Ramos</td>
+                                            <td>Chief Executive Officer (CEO)</td>
+                                            <td>London</td>
+                                            <td>47</td>
+                                            <td>2009/10/09</td>
+                                            <td>$1,200,000</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gavin Joyce</td>
+                                            <td>Developer</td>
+                                            <td>Edinburgh</td>
+                                            <td>42</td>
+                                            <td>2010/12/22</td>
+                                            <td>$92,575</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jennifer Chang</td>
+                                            <td>Regional Director</td>
+                                            <td>Singapore</td>
+                                            <td>28</td>
+                                            <td>2010/11/14</td>
+                                            <td>$357,650</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Brenden Wagner</td>
+                                            <td>Software Engineer</td>
+                                            <td>San Francisco</td>
+                                            <td>28</td>
+                                            <td>2011/06/07</td>
+                                            <td>$206,850</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fiona Green</td>
+                                            <td>Chief Operating Officer (COO)</td>
+                                            <td>San Francisco</td>
+                                            <td>48</td>
+                                            <td>2010/03/11</td>
+                                            <td>$850,000</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shou Itou</td>
+                                            <td>Regional Marketing</td>
+                                            <td>Tokyo</td>
+                                            <td>20</td>
+                                            <td>2011/08/14</td>
+                                            <td>$163,000</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Michelle House</td>
+                                            <td>Integration Specialist</td>
+                                            <td>Sidney</td>
+                                            <td>37</td>
+                                            <td>2011/06/02</td>
+                                            <td>$95,400</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Suki Burks</td>
+                                            <td>Developer</td>
+                                            <td>London</td>
+                                            <td>53</td>
+                                            <td>2009/10/22</td>
+                                            <td>$114,500</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prescott Bartlett</td>
+                                            <td>Technical Author</td>
+                                            <td>London</td>
+                                            <td>27</td>
+                                            <td>2011/05/07</td>
+                                            <td>$145,000</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gavin Cortez</td>
+                                            <td>Team Leader</td>
+                                            <td>San Francisco</td>
+                                            <td>22</td>
+                                            <td>2008/10/26</td>
+                                            <td>$235,500</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Martena Mccray</td>
+                                            <td>Post-Sales support</td>
+                                            <td>Edinburgh</td>
+                                            <td>46</td>
+                                            <td>2011/03/09</td>
+                                            <td>$324,050</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Unity Butler</td>
+                                            <td>Marketing Designer</td>
+                                            <td>San Francisco</td>
+                                            <td>47</td>
+                                            <td>2009/12/09</td>
+                                            <td>$85,675</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Howard Hatfield</td>
+                                            <td>Office Manager</td>
+                                            <td>San Francisco</td>
+                                            <td>51</td>
+                                            <td>2008/12/16</td>
+                                            <td>$164,500</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hope Fuentes</td>
+                                            <td>Secretary</td>
+                                            <td>San Francisco</td>
+                                            <td>41</td>
+                                            <td>2010/02/12</td>
+                                            <td>$109,850</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vivian Harrell</td>
+                                            <td>Financial Controller</td>
+                                            <td>San Francisco</td>
+                                            <td>62</td>
+                                            <td>2009/02/14</td>
+                                            <td>$452,500</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Timothy Mooney</td>
+                                            <td>Office Manager</td>
+                                            <td>London</td>
+                                            <td>37</td>
+                                            <td>2008/12/11</td>
+                                            <td>$136,200</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jackson Bradshaw</td>
+                                            <td>Director</td>
+                                            <td>New York</td>
+                                            <td>65</td>
+                                            <td>2008/09/26</td>
+                                            <td>$645,750</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Olivia Liang</td>
+                                            <td>Support Engineer</td>
+                                            <td>Singapore</td>
+                                            <td>64</td>
+                                            <td>2011/02/03</td>
+                                            <td>$234,500</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bruno Nash</td>
+                                            <td>Software Engineer</td>
+                                            <td>London</td>
+                                            <td>38</td>
+                                            <td>2011/05/03</td>
+                                            <td>$163,500</td>
+                                            <td><div class="badge bg-info rounded-pill">Contract</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sakura Yamamoto</td>
+                                            <td>Support Engineer</td>
+                                            <td>Tokyo</td>
+                                            <td>37</td>
+                                            <td>2009/08/19</td>
+                                            <td>$139,575</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thor Walton</td>
+                                            <td>Developer</td>
+                                            <td>New York</td>
+                                            <td>61</td>
+                                            <td>2013/08/11</td>
+                                            <td>$98,540</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Finn Camacho</td>
+                                            <td>Support Engineer</td>
+                                            <td>San Francisco</td>
+                                            <td>47</td>
+                                            <td>2009/07/07</td>
+                                            <td>$87,500</td>
+                                            <td><div class="badge bg-info rounded-pill">Contract</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Serge Baldwin</td>
+                                            <td>Data Coordinator</td>
+                                            <td>Singapore</td>
+                                            <td>64</td>
+                                            <td>2012/04/09</td>
+                                            <td>$138,575</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Zenaida Frank</td>
+                                            <td>Software Engineer</td>
+                                            <td>New York</td>
+                                            <td>63</td>
+                                            <td>2010/01/04</td>
+                                            <td>$125,250</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Zorita Serrano</td>
+                                            <td>Software Engineer</td>
+                                            <td>San Francisco</td>
+                                            <td>56</td>
+                                            <td>2012/06/01</td>
+                                            <td>$115,000</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jennifer Acosta</td>
+                                            <td>Junior Javascript Developer</td>
+                                            <td>Edinburgh</td>
+                                            <td>43</td>
+                                            <td>2013/02/01</td>
+                                            <td>$75,650</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cara Stevens</td>
+                                            <td>Sales Assistant</td>
+                                            <td>New York</td>
+                                            <td>46</td>
+                                            <td>2011/12/06</td>
+                                            <td>$145,600</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hermione Butler</td>
+                                            <td>Regional Director</td>
+                                            <td>London</td>
+                                            <td>47</td>
+                                            <td>2011/03/21</td>
+                                            <td>$356,250</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lael Greer</td>
+                                            <td>Systems Administrator</td>
+                                            <td>London</td>
+                                            <td>21</td>
+                                            <td>2009/02/27</td>
+                                            <td>$103,500</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jonas Alexander</td>
+                                            <td>Developer</td>
+                                            <td>San Francisco</td>
+                                            <td>30</td>
+                                            <td>2010/07/14</td>
+                                            <td>$86,500</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shad Decker</td>
+                                            <td>Regional Director</td>
+                                            <td>Edinburgh</td>
+                                            <td>51</td>
+                                            <td>2008/11/13</td>
+                                            <td>$183,000</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Michael Bruce</td>
+                                            <td>Javascript Developer</td>
+                                            <td>Singapore</td>
+                                            <td>29</td>
+                                            <td>2011/06/27</td>
+                                            <td>$183,000</td>
+                                            <td><div class="badge bg-primary text-white rounded-pill">Full-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Donna Snider</td>
+                                            <td>Customer Support</td>
+                                            <td>New York</td>
+                                            <td>27</td>
+                                            <td>2011/01/25</td>
+                                            <td>$112,000</td>
+                                            <td><div class="badge bg-secondary text-white rounded-pill">Part-time</div></td>
+                                            <td>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> -->
+
+                </main>
+                        <!-- end row -->
+                        <!-- Example DataTable for Dashboard Demo-->
+                        <footer class="footer-admin mt-auto footer-light">
+                            <div class="container-xl px-4">
+                                <div class="row">
+                                    <div class="col-md-6 small">Copyright &copy; Your Website 2021</div>
+                                    <div class="col-md-6 text-md-end small">
+                                        <a href="#!">Privacy Policy</a>
+                                        &middot;
+                                        <a href="#!">Terms &amp; Conditions</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+            </div>
+        </div>
+        <!-- <script src="{% static 'kuesioner/js/scripts.js' %}"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="{% static 'kuesioner/assets/demo/chart-area-demo.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- JavaScript code -->
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="{% static 'kuesioner/js/datatables/datatables-simple-demo.js' %}"></script>
+        <script src="{% static 'kuesioner/js/litepicker.js' %}"></script>
+        <script src="{% static 'js/scripts.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
+        <script>
+            // Set new default font family and font color to mimic Bootstrap's default styling
+            (Chart.defaults.global.defaultFontFamily = "Metropolis"),
+            "-apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif";
+            Chart.defaults.global.defaultFontColor = "#858796";
+
+            // Pie Chart Example
+            var ctx = document.getElementById("myPieChart");
+            var femaleCount = {{ female_count }};
+            var maleCount = {{ male_count }};
+            var totalCount = femaleCount + maleCount;
+            var femalePercentage = (femaleCount / totalCount) * 100;
+            var malePercentage = (maleCount / totalCount) * 100;
+
+            var myPieChart = new Chart(ctx, {
+            type: "doughnut",
+            data: {
+                labels: ["Perempuan", "Laki Laki"],
+                datasets: [
+                {
+                    data: [femaleCount, maleCount],
+                    backgroundColor: ["rgba(255, 20, 147, 1)", "rgba(0, 97, 242, 1)"],
+                    hoverBackgroundColor: ["rgba(0, 97, 242, 0.9)", "rgba(0, 172, 105, 0.9)"],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                },
+                ],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                backgroundColor: "rgb(255,255,255)",
+                bodyFontColor: "#858796",
+                borderColor: "#dddfeb",
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: false,
+                caretPadding: 10,
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                    var dataset = data.datasets[tooltipItem.datasetIndex];
+                    var currentValue = dataset.data[tooltipItem.index];
+                    var percentage = parseFloat(
+                        ((currentValue / totalCount) * 100).toFixed(2)
+                    );
+                    return (
+                        data.labels[tooltipItem.index] +
+                        ": " +
+                        currentValue +
+                        " (" +
+                        percentage +
+                        "%)"
+                    );
+                    },
+                },
+                },
+                legend: {
+                display: false,
+                },
+                cutoutPercentage: 80,
+            },
+            });
+        </script>
+        <script>
+            // Retrieve the values of female_count and male_count from your data source
+            var femaleCount = {{ female_count }};
+            var maleCount = {{ male_count }};
+            
+            // Calculate the total count
+            var totalCount = femaleCount + maleCount;
+            
+            // Calculate the percentage for females and males
+            var femalePercentage = (femaleCount / totalCount) * 100;
+            var malePercentage = (maleCount / totalCount) * 100;
+            
+            // Update the content of the HTML elements with the calculated values
+            document.getElementById("femaleCount").textContent = femaleCount + " (" + femalePercentage.toFixed(2) + "%)";
+            document.getElementById("maleCount").textContent = maleCount + " (" + malePercentage.toFixed(2) + "%)";
+        </script>
+        <script>
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = "'Metropolis', '-apple-system', 'system-ui', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif";
+        Chart.defaults.global.defaultFontColor = "#858796";
+
+        function number_format(number, decimals, dec_point, thousands_sep) {
+            // Function implementation here
+            // ...
+        }
+
+        // Bar Chart Example
+        var ctx = document.getElementById("myBarChart");
+        var myBarChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: ["SD", "SLTP", "SLTA", "Diploma", "Sarjana", "Pasca Sarjana"],
+                datasets: [{
+                    label: "Education Count",
+                    backgroundColor: "rgba(0, 97, 242, 1)",
+                    hoverBackgroundColor: "rgba(0, 97, 242, 0.9)",
+                    borderColor: "#4e73df",
+                    data: [
+                        {{ education_SD }},
+                        {{ education_SLTP }},
+                        {{ education_SLTA }},
+                        {{ education_Diploma }},
+                        {{ education_Sarjana }},
+                        {{ education_Pasca_Sarjana }}
+                    ],
+                    maxBarThickness: 25
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: "month"
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 6
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            min: 0,  // Specify the minimum value for the y-axis
+                            max: {{ total_count }},  // Specify the maximum value for the y-axis
+                            stepSize: 10  // Specify the interval between ticks
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Jumlah Peserta"
+                        }
+                    }]
+                },
+                legend: {
+                display: false 
+            }
+        }
+        });
+        </script>
+        <script>
+            var subtraction = 1000 - {{ total_count }};
+
+        // Update the HTML element with the subtraction result
+        document.getElementById("subtractionResult").textContent = subtraction.toString();
+        </script>
+        <script>
+            var total_participant = 1000;
+
+                // Perform the percentage calculation
+                var percentage = ({{total_count}} / total_participant) * 100;
+
+                // Update the HTML element with the percentage result
+                document.getElementById("percentageResult").textContent = percentage.toFixed(2) + "%";
+        </script>
+        <script>
+            // Example birthdates array (YYYY-MM-DD format)
+            var birthdates = [
+                {% for birthday in birthday_list %}
+                    "{{ birthday }}",
+                {% endfor %}
+                // Add more birthdates as needed
+            ];
+
+            // Calculate the age and distribution for each age group
+            var currentDate = new Date();
+            var genXCount = 0;
+            var genYCount = 0;
+            var genZCount = 0;
+
+            birthdates.forEach(function (birthdate) {
+                var birthDate = new Date(birthdate);
+                var age = currentDate.getFullYear() - birthDate.getFullYear();
+
+                if (
+                    currentDate.getMonth() < birthDate.getMonth() ||
+                    (currentDate.getMonth() === birthDate.getMonth() &&
+                        currentDate.getDate() < birthDate.getDate())
+                ) {
+                    age--;
+                }
+
+                if (age >= 39 && age <= 54) {
+                    genXCount++;
+                } else if (age >= 25 && age <= 38) {
+                    genYCount++;
+                } else if (age < 24) {
+                    genZCount++;
+                }
+            });
+
+            var totalCount = birthdates.length;
+            var genXPercentage = (genXCount / totalCount) * 100;
+            var genYPercentage = (genYCount / totalCount) * 100;
+            var genZPercentage = (genZCount / totalCount) * 100;
+
+            // Update the HTML elements with the percentage values
+            document.getElementById("genXPercentage").textContent = genXPercentage.toFixed(2) + "%";
+            document.getElementById("genYPercentage").textContent = genYPercentage.toFixed(2) + "%";
+            document.getElementById("genZPercentage").textContent = genZPercentage.toFixed(2) + "%";
+        </script>
+        <script>
+            var ctx = document.getElementById("myPieChart1");
+            var myPieChart = new Chart(ctx, {
+            type: "doughnut",
+            data: {
+                labels: ["Gen X", "Gen Y", "Gen Z"], // Labels for the pie chart sections
+                datasets: [
+                {
+                    data: [genXPercentage, genYPercentage, genZPercentage], // Use the calculated percentages from previous code
+                    backgroundColor: [
+                    "rgba(0, 170, 0, 1)",
+                    "rgba(255, 130, 0, 1)",
+                    "rgba(0, 0, 255, 1)",
+                    ],
+                    hoverBackgroundColor: [
+                    "rgba(0, 97, 242, 0.9)",
+                    "rgba(0, 172, 105, 0.9)",
+                    "rgba(88, 0, 232, 0.9)",
+                    ],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                },
+                ],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                backgroundColor: "rgb(255,255,255)",
+                bodyFontColor: "#858796",
+                borderColor: "#dddfeb",
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: false,
+                caretPadding: 10,
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                    var label = data.labels[tooltipItem.index] || "";
+                    var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                    return label + ": " + value + "%";
+                    },
+                },
+                },
+                legend: {
+                display: false,
+                },
+                cutoutPercentage: 80,
+            },
+            });
+        </script>
+        <script>// Set new default font family and font color to mimic Bootstrap's default styling
+            // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = "'Metropolis', '-apple-system', 'system-ui', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif";
+        Chart.defaults.global.defaultFontColor = "#858796";
+
+        function number_format(number, decimals, dec_point, thousands_sep) {
+            // Function implementation here
+            // ...
+        }
+
+        // Bar Chart Example
+        var ctx = document.getElementById("myBarChart1");
+        var myBarChart1 = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: ["SD", "SLTP", "SLTA", "Diploma", "Sarjana", "Pasca Sarjana"],
+                datasets: [{
+                    label: "Education Count",
+                    backgroundColor: "rgba(0, 97, 242, 1)",
+                    hoverBackgroundColor: "rgba(0, 97, 242, 0.9)",
+                    borderColor: "#4e73df",
+                    data: [
+                        {{ education_SD }},
+                        {{ education_SLTP }},
+                        {{ education_SLTA }},
+                        {{ education_Diploma }},
+                        {{ education_Sarjana }},
+                        {{ education_Pasca_Sarjana }}
+                    ],
+                    maxBarThickness: 25
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: "month"
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 6
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            min: 0,  // Specify the minimum value for the y-axis
+                            max: {{ total_count }},  // Specify the maximum value for the y-axis
+                            stepSize: 10  // Specify the interval between ticks
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Jumlah Peserta"
+                        }
+                    }]
+                },
+                legend: {
+                display: false 
+            }
+        }
+        });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+        <script src="{% static 'kuesioner/js/litepicker.js' %}"></script>
+        <script src="{% static 'kuesioner/js/scripts.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    </body>
+</html>

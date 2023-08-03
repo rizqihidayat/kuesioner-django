@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Daftar - Soluntika</title>
+        <link href="{% static 'kuesioner/css/styles.css' %}" rel="stylesheet" />
+        <link rel="icon" type="image/x-icon" href="{% static 'kuesioner/assets/img/soluntika-kecil.png' %}" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-primary">
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container-xl px-4">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-7">
+                                <!-- Basic registration form-->
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header justify-content-center"><h3 class="fw-light my-4">Buat Akun</h3></div>
+                                    <div class="card-body">
+                                        <!-- Registration form-->
+                                        {% load widget_tweaks %}
+                                        <form method="post" class="needs-validation {% if form.errors %}was-validated{% endif %}" novalidate>
+                                            {% csrf_token %}
+                                            <!-- Form Row-->
+                                            <div class="row gx-3">
+                                                <div class="col-md-6">
+                                                    <!-- Form Group (first name)-->                                      
+                                                    <div class="mb-3">
+                                                        <label class="small mb-1">Nama Depan</label>   
+                                                        {% if form.is_bound %}
+                                                            {% if form.first_name.errors %}
+                                                                {% render_field form.first_name class="form-control is-invalid" %}
+                                                            {% else %}
+                                                                {% render_field form.first_name class="form-control is-valid" %}
+                                                            {% endif %}
+                                                        {% else %}
+                                                            {% render_field form.first_name class="form-control" placeholder="Nama Depan" %}
+                                                        {% endif %}
+                                                        {% for error in form.first_name.errors %}
+                                                            <div class="invalid-feedback">{{ error }}</div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!-- Form Group (last name)-->
+                                                    <div class="mb-3">
+                                                        <label class="small mb-1">Nama Belakang</label>
+                                                        {% if form.is_bound %}
+                                                            {% if form.last_name.errors %}
+                                                                {% render_field form.last_name class="form-control is-invalid" %}
+                                                            {% else %}
+                                                                {% render_field form.last_name class="form-control is-valid" %}
+                                                            {% endif %}
+                                                        {% else %}
+                                                            {% render_field form.last_name class="form-control" placeholder="Nama Belakang" %}
+                                                        {% endif %}
+                                                        {% for error in form.last_name.errors %}
+                                                            <div class="invalid-feedback">{{ error }}</div>
+                                                        {% endfor %}
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                            <!-- Form Group (email username) -->
+                                            <div class="mb-3">
+                                                <label class="small mb-1">Nama Pengguna</label>
+        
+                                                {% if form.is_bound %}
+                                                            {% if form.username.errors %}
+                                                                {% render_field form.username class="form-control is-invalid" %}
+                                                            {% else %}
+                                                                {% render_field form.username class="form-control is-valid" %}
+                                                            {% endif %}
+                                                        {% else %}
+                                                            {% render_field form.username class="form-control" placeholder="Nama Pengguna" %}
+                                                        {% endif %}
+                                                        {% for error in form.username.errors %}
+                                                            <div class="invalid-feedback">{{ error }}</div>
+                                                        {% endfor %}
+                                                
+                                            </div>
+                                            <!-- Form Group (email email) -->
+                                            <div class="mb-3">
+                                                <label class="small mb-1">{{ form.email.label }}</label>
+            
+                                                {% if form.is_bound %}
+                                                            {% if form.email.errors %}
+                                                                {% render_field form.email class="form-control is-invalid" %}
+                                                            {% else %}
+                                                                {% render_field form.email class="form-control is-valid" %}
+                                                            {% endif %}
+                                                        {% else %}
+                                                            {% render_field form.email class="form-control" placeholder="Masukan Email Anda" %}
+                                                        {% endif %}
+                                                        {% for error in form.email.errors %}
+                                                            <div class="invalid-feedback">{{ error }}</div>
+                                                        {% endfor %}
+                                                
+                                            </div>
+                                            <!-- Form Row    -->
+                                            <div class="row gx-3">
+                                                <div class="col-md-6">
+                                                    <!-- Form Group (password)-->
+                                                    <div class="mb-3">
+                                                        <label class="small mb-1">Kata Sandi</label>
+
+                                                        {% if form.is_bound %}
+                                                                {% if form.password1.errors %}
+                                                                    {% render_field form.password1 class="form-control is-invalid" %}
+                                                                {% else %}
+                                                                    {% render_field form.password1 class="form-control is-valid" %}
+                                                                {% endif %}
+                                                            {% else %}
+                                                                {% render_field form.password1 class="form-control" placeholder="Masukan Kata Sandi" %}
+                                                            {% endif %}
+                                                            {% for error in form.password1.errors %}
+                                                                <div class="invalid-feedback">{{ error }}</div>
+                                                            {% endfor %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!-- Form Group (confirm password)-->
+                                                    <div class="mb-3">
+                                                        <label class="small mb-1">Konfirmasi Kata Sandi</label>
+
+                                                        {% if form.is_bound %}
+                                                                {% if form.password2.errors %}
+                                                                    {% render_field form.password2 class="form-control is-invalid" %}
+                                                                {% else %}
+                                                                    {% render_field form.password2 class="form-control is-valid" %}
+                                                                {% endif %}
+                                                            {% else %}
+                                                                {% render_field form.password2 class="form-control" placeholder="Konfirmasi Kata Sandi" %}
+                                                            {% endif %}
+                                                            {% for error in form.password2.errors %}
+                                                                <div class="invalid-feedback">{{ error }}</div>
+                                                            {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                            <!-- Form Group (create account submit)-->
+                                                <button type="submit" class="btn btn-primary btn-block"> Buat Akun  </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <div class="small"><a href="{% url 'login' %}">Punya akun? Masuk ke login</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <div id="layoutAuthentication_footer">
+                <footer class="footer-admin mt-auto footer-dark">
+                    <div class="container-xl px-4">
+                        <div class="row">
+                            <div class="col-md-6 small">Copyright &copy; Soluntika 2023</div>
+                            <div class="col-md-6 text-md-end small">
+                                <a href="#!">Privacy Policy</a>
+                                &middot;
+                                <a href="#!">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="{% static 'kuesioner/js/scripts.js' %}"></script>
+    </body>
+</html>

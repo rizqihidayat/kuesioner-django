@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Position Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #chartContainer {
+            width: 600px;
+            height: 400px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Position Chart</h1>
+    
+    <form action="" method="GET">
+        <label for="location">Select Location:</label>
+        <select name="location" id="location">
+            <option value="">All</option>
+            {% for location in locations %}
+                <option value="{{ location.id }}" {% if location.id == selected_location %}selected{% endif %}>{{ location.location }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <h2>Positions:</h2>
+    <div id="chartContainer">
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the positions data
+            const positions = [
+                {% for position in positions %}
+                    { position: "{{ position.position }}", count: {{ position.count }} },
+                {% endfor %}
+            ];
+
+            // Extract position labels and counts
+            const labels = positions.map(pos => pos.position);
+            const counts = positions.map(pos => pos.count);
+
+            // Create a bar chart
+            const ctx = document.getElementById("barChart").getContext("2d");
+            new Chart(ctx, {
+                type: "horizontalBar",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: "rgba(75, 192, 192, 0.6)"
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

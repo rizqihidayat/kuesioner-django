@@ -1,0 +1,1106 @@
+{% load static %}
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Smart Survey</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
+        <link href="{% static 'kuesioner/css/styles.css' %}" rel="stylesheet" />
+        <link rel="icon" type="image/x-icon" href="{% static 'kuesioner/assets/img/soluntika-kecil88.png' %}" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="nav-fixed">
+        <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
+            <!-- Sidenav Toggle Button-->
+            <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i data-feather="menu"></i></button>
+            <!-- Navbar Brand-->
+            <!-- * * Tip * * You can use text or an image for your navbar brand.-->
+            <!-- * * * * * * When using an image, we recommend the SVG format.-->
+            <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
+            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">Smart Survey</a>
+            <!-- Navbar Search Input-->
+            <!-- * * Note: * * Visible only on and above the lg breakpoint-->
+            <form class="form-inline me-auto d-none d-lg-block me-3">
+                <div class="input-group input-group-joined input-group-solid">
+                    <input class="form-control pe-0" type="search" placeholder="Search" aria-label="Search" />
+                    <div class="input-group-text"><i data-feather="search"></i></div>
+                </div>
+            </form>
+            <!-- Navbar Items-->
+            <ul class="navbar-nav align-items-center ms-auto">
+                <!-- Documentation Dropdown-->
+                <li class="nav-item dropdown no-caret d-none d-md-block me-3">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="fw-500">Documentation</div>
+                        <i class="fas fa-chevron-right dropdown-arrow"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end py-0 me-sm-n15 me-lg-0 o-hidden animated--fade-in-up" aria-labelledby="navbarDropdownDocs">
+                        <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro" target="_blank">
+                            <div class="icon-stack bg-primary-soft text-primary me-4"><i data-feather="book"></i></div>
+                            <div>
+                                <div class="small text-gray-500">Documentation</div>
+                                Usage instructions and reference
+                            </div>
+                        </a>
+                        <div class="dropdown-divider m-0"></div>
+                        <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro/components" target="_blank">
+                            <div class="icon-stack bg-primary-soft text-primary me-4"><i data-feather="code"></i></div>
+                            <div>
+                                <div class="small text-gray-500">Components</div>
+                                Code snippets and reference
+                            </div>
+                        </a>
+                        <div class="dropdown-divider m-0"></div>
+                        <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro/changelog" target="_blank">
+                            <div class="icon-stack bg-primary-soft text-primary me-4"><i data-feather="file-text"></i></div>
+                            <div>
+                                <div class="small text-gray-500">Changelog</div>
+                                Updates and changes
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <!-- Navbar Search Dropdown-->
+                <!-- * * Note: * * Visible only below the lg breakpoint-->
+                <li class="nav-item dropdown no-caret me-3 d-lg-none">
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="searchDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="search"></i></a>
+                    <!-- Dropdown - Search-->
+                    <div class="dropdown-menu dropdown-menu-end p-3 shadow animated--fade-in-up" aria-labelledby="searchDropdown">
+                        <form class="form-inline me-auto w-100">
+                            <div class="input-group input-group-joined input-group-solid">
+                                <input class="form-control pe-0" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                                <div class="input-group-text"><i data-feather="search"></i></div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                <!-- Alerts Dropdown-->
+                <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="bell"></i></a>
+                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
+                        <h6 class="dropdown-header dropdown-notifications-header">
+                            <i class="me-2" data-feather="bell"></i>
+                            Alerts Center
+                        </h6>
+                        <!-- Example Alert 1-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <div class="dropdown-notifications-item-icon bg-warning"><i data-feather="activity"></i></div>
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-details">December 29, 2021</div>
+                                <div class="dropdown-notifications-item-content-text">This is an alert message. It's nothing serious, but it requires your attention.</div>
+                            </div>
+                        </a>
+                        <!-- Example Alert 2-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <div class="dropdown-notifications-item-icon bg-info"><i data-feather="bar-chart"></i></div>
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-details">December 22, 2021</div>
+                                <div class="dropdown-notifications-item-content-text">A new monthly report is ready. Click here to view!</div>
+                            </div>
+                        </a>
+                        <!-- Example Alert 3-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <div class="dropdown-notifications-item-icon bg-danger"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-details">December 8, 2021</div>
+                                <div class="dropdown-notifications-item-content-text">Critical system failure, systems shutting down.</div>
+                            </div>
+                        </a>
+                        <!-- Example Alert 4-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <div class="dropdown-notifications-item-icon bg-success"><i data-feather="user-plus"></i></div>
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-details">December 2, 2021</div>
+                                <div class="dropdown-notifications-item-content-text">New user request. Woody has requested access to the organization.</div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item dropdown-notifications-footer" href="#!">View All Alerts</a>
+                    </div>
+                </li>
+                <!-- Messages Dropdown-->
+                <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownMessages" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail"></i></a>
+                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownMessages">
+                        <h6 class="dropdown-header dropdown-notifications-header">
+                            <i class="me-2" data-feather="mail"></i>
+                            Message Center
+                        </h6>
+                        <!-- Example Message 1  -->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <img class="dropdown-notifications-item-img" src="{% static 'kuesioner/assets/img/profile-2' %}" />
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                                <div class="dropdown-notifications-item-content-details">Thomas Wilcox · 58m</div>
+                            </div>
+                        </a>
+                        <!-- Example Message 2-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <img class="dropdown-notifications-item-img" src="{% static 'kuesioner/assets/img/profile-3' %}" />
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                                <div class="dropdown-notifications-item-content-details">Emily Fowler · 2d</div>
+                            </div>
+                        </a>
+                        <!-- Example Message 3-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <img class="dropdown-notifications-item-img" src="{% static 'kuesioner/assets/img/profile-4' %}" />
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                                <div class="dropdown-notifications-item-content-details">Marshall Rosencrantz · 3d</div>
+                            </div>
+                        </a>
+                        <!-- Example Message 4-->
+                        <a class="dropdown-item dropdown-notifications-item" href="#!">
+                            <img class="dropdown-notifications-item-img" src="{% static 'kuesioner/assets/img/profile-5' %}" />
+                            <div class="dropdown-notifications-item-content">
+                                <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                                <div class="dropdown-notifications-item-content-details">Colby Newton · 3d</div>
+                            </div>
+                        </a>
+                        <!-- Footer Link-->
+                        <a class="dropdown-item dropdown-notifications-footer" href="#!">Read All Messages</a>
+                    </div>
+                </li>
+                <!-- User Dropdown-->
+                <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <!-- <img class="img-fluid" src="{% static 'kuesioner/assets/img/illustrations/profiles/profile-1.png' %}" /> -->
+                        <!-- Profile picture image-->
+                        {% if user_data_obj.profile_picture %}
+                        <img class="img-fluid" src="{{ user_data_obj.profile_picture.url }}" alt="" />
+                        {% else %}
+                        <!-- Default profile picture -->
+                            <img class="img-fluid" src="{% static 'kuesioner/assets/img/illustrations/profiles/profile-1.png' %}" alt="" />
+                        {% endif %}
+                        <!-- Profile picture help block-->
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
+                        <h6 class="dropdown-header d-flex align-items-center">
+                            <!-- Profile picture image-->
+                            {% if user_data_obj.profile_picture %}
+                            <img class="dropdown-user-img" src="{{ user_data_obj.profile_picture.url }}" alt="" />
+                            {% else %}
+                            <!-- Default profile picture -->
+                                <img class="dropdown-user-img" src="{% static 'kuesioner/assets/img/illustrations/profiles/profile-1.png' %}" alt="" />
+                            {% endif %}
+                            <!-- Profile picture help block-->
+                            <!-- <img class="dropdown-user-img" src="{% static 'kuesioner/assets/img/illustrations/profiles/profile-1.png' %}" /> -->
+                            <div class="dropdown-user-details">
+                                <div class="dropdown-user-details-name">{{ user.first_name }} {{ user.last_name }}</div>
+                                <div class="dropdown-user-details-email">{{ user.email }}</div>
+                            </div>
+                        </h6>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'admin_logout' %}">
+                            <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
+                            Keluar
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sidenav shadow-right sidenav-light">
+                    <div class="sidenav-menu">
+                        <div class="nav accordion" id="accordionSidenav">
+                            <!-- Sidenav Menu Heading (Account)-->
+                            <!-- * * Note: * * Visible only on and above the sm breakpoint-->
+                            <div class="sidenav-menu-heading d-sm-none">Account</div>
+                            <!-- Sidenav Link (Alerts)-->
+                            <!-- * * Note: * * Visible only on and above the sm breakpoint-->
+                            <a class="nav-link d-sm-none" href="#!">
+                                <div class="nav-link-icon"><i data-feather="bell"></i></div>
+                                Alerts
+                                <span class="badge bg-warning-soft text-warning ms-auto">4 New!</span>
+                            </a>
+                            <!-- Sidenav Link (Messages)-->
+                            <!-- * * Note: * * Visible only on and above the sm breakpoint-->
+                            <a class="nav-link d-sm-none" href="#!">
+                                <div class="nav-link-icon"><i data-feather="mail"></i></div>
+                                Messages
+                                <span class="badge bg-success-soft text-success ms-auto">2 New!</span>
+                            </a>
+                            <!-- Sidenav Menu Heading (Core)-->
+                            <div class="sidenav-menu-heading">Core</div>
+                            <!-- Sidenav Accordion (Dashboard)-->
+                            <a class="nav-link active" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="true" aria-controls="collapseDashboards">
+                                <div class="nav-link-icon"><i data-feather="activity"></i></div>
+                                Dashboards
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                              </a>
+                              <div class="collapse show" id="collapseDashboards" data-bs-parent="#accordionSidenavAppsMenu">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                                  <a class="nav-link active" href="{% url 'dashboard' %}">
+                                    Dashboard
+                                    <!-- <span class="badge bg-primary-soft text-primary ms-auto">Updated</span> -->
+                                  </a>
+                                  <a class="nav-link" href="{% url 'dashboard2' %}">Index</a>
+                                  <a class="nav-link" href="{% url 'dashboard3' %}">Komentar & Saran</a>
+                                </nav>
+                              </div>
+                              
+                              <div class="sidenav-menu-heading">User Management</div>
+                              
+                              <!-- Sidenav Accordion (User Management) -->
+                              <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseUserManagement" aria-expanded="false" aria-controls="collapseUserManagement">
+                                <div class="nav-link-icon"><i data-feather="user"></i></div>
+                                User Management
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                              </a>
+                              <div class="collapse" id="collapseUserManagement" data-bs-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavUserManagement">
+                                  <a class="nav-link" href="{% url 'participant_list' %}">Participant List</a>
+                                  <a class="nav-link" href="{% url 'add_participant' %}">Add Participant</a>
+                                  <a class="nav-link" href="{% url 'jabatan_list' %}">Progress</a>
+                                  <a class="nav-link" href="dashboard-3.html">Raw Data</a>
+                                </nav>
+                              </div>
+                              
+                              <div class="sidenav-menu-heading">Manage Kuesioner</div>
+                              
+                              <!-- Sidenav Accordion (Manage Kuesioner) -->
+                              <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseManageKuesioner" aria-expanded="false" aria-controls="collapseManageKuesioner">
+                                <div class="nav-link-icon"><i data-feather="book-open"></i></div>
+                                Manage Kuesioner
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                              </a>
+                              <div class="collapse" id="collapseManageKuesioner" data-bs-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavManageKuesioner">
+                                  <a class="nav-link" href="{% url 'manage_kuesioner' %}">Kuesioner</a>
+                                  <a class="nav-link" href="{% url 'add_kuesioner' %}">Add Kuesioner</a>
+                                </nav>
+                              </div>
+                              <div class="collapse" id="collapsePages" data-bs-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
+                                  <div class="collapse" id="pagesCollapseAuth" data-bs-parent="#accordionSidenavPagesMenu">
+                                    <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesAuth">
+                                    </nav>
+                                  </div>
+                                </nav>
+                              </div>
+                              
+                              <div class="collapse" id="collapseApps" data-bs-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavAppsMenu">
+                                </nav>
+                              </div>
+                              
+                              <div class="collapse" id="collapseLayouts" data-bs-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
+                                </nav>
+                              </div>
+                            </div>
+                          </div>
+                    <!-- Sidenav Footer-->
+                    <div class="sidenav-footer">
+                        <div class="sidenav-footer-content">
+                            <div class="sidenav-footer-subtitle">Logged in as:</div>
+                            <div class="sidenav-footer-title">{{user.first_name}} {{user.last_name}}</div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+                        <div class="container-xl px-4">
+                            <div class="page-header-content pt-4">
+                                <div class="row align-items-center justify-content-between">
+                                    <div class="col-auto mt-4">
+                                        <h1 class="page-header-title">
+                                            <div class="page-header-icon"><i data-feather="activity"></i></div>
+                                            Dashboard
+                                        </h1>
+                                        <div class="page-header-subtitle">Example dashboard overview and content summary</div>
+                                    </div>
+                                    <div class="col-12 col-xl-auto mt-4">
+                                        <div class="input-group input-group-joined border-0" style="width: 16.5rem">
+                                            <span class="input-group-text"><i class="text-primary" data-feather="calendar"></i></span>
+                                            <input class="form-control ps-0 pointer" id="litepickerRangePlugin" placeholder="Select date range..." />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <!-- Main page content-->
+                    <div class="container-xl px-4 mt-n10">
+                        <!-- Colored Cards for Dashboard Demo -->
+                        <div class="row">
+                            <div class="col-lg-6 col-xl-3 mb-4">
+                                <div class="card bg-primary text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="me-3">
+                                                <div class="text-white-75 small">Total Participant</div>
+                                                <div class="text-lg fw-bold">1000</div>
+                                            </div>
+                                            <i class="feather-xl text-white-50" data-feather="message-circle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                                        <a class="text-white stretched-link" href="#!">View Report</a>
+                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-3 mb-4">
+                                <div class="card bg-warning text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="me-3">
+                                                <div class="text-white-75 small">Total Responden belum mengisi</div>
+                                                <div class="text-lg fw-bold" id="subtractionResult"></div>
+                                            </div>
+                                            <i class="feather-xl text-white-50" data-feather="dollar-sign"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                                        <a class="text-white stretched-link" href="#!">View Report</a>
+                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-3 mb-4">
+                                <div class="card bg-success text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="me-3">
+                                                <div class="text-white-75 small">Total Responden</div>
+                                                <div class="text-lg fw-bold">{{total_count}}</div>
+                                            </div>
+                                            <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                                        <a class="text-white stretched-link" href="#!">View Tasks</a>
+                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-3 mb-4">
+                                <div class="card bg-danger text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="me-3">
+                                                <div class="text-white-75 small">Persentase Responden</div>
+                                                <div class="text-lg fw-bold" id="percentageResult"></div>
+                                            </div>
+                                            <i class="feather-xl text-white-50" data-feather="calendar"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                                        <a class="text-white stretched-link" href="#!">View Requests</a>
+                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- row pertama -->
+                        <div class="row">
+                            <!-- Bar chart example-->
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">Pendidikan (Target Vs Actual)</div>
+                                    <div class="card-body">
+                                        <div class="chart-bar"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
+                                    </div>
+                                    <div class="card-footer small text-muted">Updated now</div>
+                                </div>
+                            </div>
+                            <!-- End Bar chart example-->
+                            <!-- Pie chart example-->
+                            <div class="col-xl-6 mb-4">
+                                <div class="card card-header-actions h-100">
+                                    <div class="card-header">
+                                        Lokasi Penempatan
+                                        <div class="dropdown no-caret">
+                                            <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
+                                            <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="{% url 'dashboard' %}?location=all" onclick="updateChart('all')">All Locations</a>
+                                                {% for location in locations %}
+                                                    <a class="dropdown-item" href="{% url 'dashboard' %}?location={{ location.id }}" onclick="updateChart('{{ location.id }}')">{{ location.location }}</a>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="chart-bar"><canvas id="myHorizontalBarChart" width="100%" height="50"></canvas></div>
+                                    </div>
+                                    <div class="card-footer small text-muted">Updated now</div>
+                                </div>
+                            </div>
+                        </div>
+                            <!-- Bar chart example-->
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">Usia</div>
+                                    <div class="card-body">
+                                        <div class="chart-pie mb-4"><canvas id="myPieChart1" width="100%" height="50"></canvas></div>
+                                        <div class="list-group list-group-flush">
+                                            <div class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
+                                                <div class="me-3">
+                                                    <i class="fas fa-circle fa-sm me-1 text-green"></i>
+                                                    Gen X (39 th - 54 th)
+                                                </div>
+                                                <div class="fw-500 text-dark" id="genXPercentage"></div>
+                                            </div>
+                                            <div class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
+                                                <div class="me-3">
+                                                    <i class="fas fa-circle fa-sm me-1 text-orange"></i>
+                                                    Gen Y (25 th - 38 th)
+                                                </div>
+                                                <div class="fw-500 text-dark" id="genYPercentage"></div>
+                                            </div>
+                                            <div class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
+                                                <div class="me-3">
+                                                    <i class="fas fa-circle fa-sm me-1 text-blue"></i>
+                                                    Gen Z (< 24 th)
+                                                </div>
+                                                <div class="fw-500 text-dark" id="genZPercentage"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">                                
+                                <div class="card mb-4">
+                                    <div class="card-header">Jenis kelamin (Target Vs Actual)</div>
+                                    <div class="card-body">
+                                        <div class="chart-pie mb-4"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+                                        <div class="list-group list-group-flush">
+                                            <div class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
+                                                <div class="me-3">
+                                                    <i class="fas fa-female fa-sm me-1 text-pink"></i>
+                                                    Perempuan
+                                                </div>
+                                                <div class="fw-500 text-dark" id="femaleCount"></div>
+                                            </div>
+                                            <div class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
+                                                <div class="me-3">
+                                                    <i class="fas fa-male fa-sm me-1 text-blue"></i>
+                                                    Laki-laki
+                                                </div>
+                                                <div class="fw-500 text-dark" id="maleCount"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Pie chart example-->
+                        <div class="row">
+                        <div class="col-xl-6 mb-4">
+                            <div class="card card-header-actions h-100">
+                                <div class="card-header">
+                                    Jenis Jabatan
+                                    <div class="dropdown no-caret">
+                                        <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
+                                        <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#!">
+                                                <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                Detail
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="small">
+                                        Managerial
+                                        <span class="float-end fw-bold">{{jabatan_managerial}}%</span>
+                                    </h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: {{jabatan_managerial}}%" aria-valuenow="{{jabatan_managerial}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small">
+                                        Specialist
+                                        <span class="float-end fw-bold">{{jabatan_specialist}}%</span>
+                                    </h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: {{jabatan_specialist}}%" aria-valuenow="{{jabatan_specialist}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small">
+                                        Technical
+                                        <span class="float-end fw-bold">{{jabatan_technical}}%</span>
+                                    </h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar" role="progressbar" style="width: {{jabatan_technical}}%" aria-valuenow="{{jabatan_technical}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small">
+                                        Administrative
+                                        <span class="float-end fw-bold">{{jabatan_administrative}}%</span>
+                                    </h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: {{jabatan_administrative}}%" aria-valuenow="{{jabatan_administrative}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <!-- ESI OVERALL COMPANY - PER TINGKAT JABATAN -->
+                            <div class="col-xl-6 mb-4">
+                                <div class="card card-header-actions h-100">
+                                    <div class="card-header">
+                                        Tingkat Jabatan
+                                        <div class="dropdown no-caret">
+                                            <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
+                                            <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    Detail
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="small">
+                                            Corporate Deputy Director/Group Head/Executive Vice President
+                                            <span class="float-end fw-bold">{{posisi_direktur}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{posisi_direktur}}%" aria-valuenow="{{posisi_direktur}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            General Manager/Vice President
+                                            <span class="float-end fw-bold">{{posisi_general}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{posisi_general}}%" aria-valuenow="{{posisi_general}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            Senior Manajer/Manajer
+                                            <span class="float-end fw-bold">{{posisi_senior}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar" role="progressbar" style="width: {{posisi_senior}}%" aria-valuenow="{{posisi_senior}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            Junior Manajer
+                                            <span class="float-end fw-bold">{{posisi_junior}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: {{posisi_junior}}%" aria-valuenow="{{posisi_junior}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            Asisten Manajer
+                                            <span class="float-end fw-bold">{{posisi_asman}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: {{posisi_asman}}%" aria-valuenow="{{posisi_asman}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            Senior Supervisor
+                                            <span class="float-end fw-bold">{{posisi_sspv}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{posisi_sspv}}%" aria-valuenow="{{posisi_sspv}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            Supervisor
+                                            <span class="float-end fw-bold">{{posisi_spv}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{posisi_spv}}%" aria-valuenow="{{posisi_spv}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            Junior Supervisor
+                                            <span class="float-end fw-bold">{{posisi_jspv}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar" role="progressbar" style="width: {{posisi_jspv}}%" aria-valuenow="{{posisi_jspv}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            Pelaksana
+                                            <span class="float-end fw-bold">{{posisi_pelaksana}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: {{posisi_pelaksana}}%" aria-valuenow="{{posisi_pelaksana}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <!-- END OF ESI OVERALL COMPANY - PER TINGKAT JABATAN -->
+                            <!-- ESI OVERALL COMPANY - PER BIDANG JABATAN / KORSA -->
+                        <div class="row">
+                            <div class="col-xl-6 mb-4">
+                                <div class="card card-header-actions h-100">
+                                    <div class="card-header">
+                                        Bidang Pekerjaan / Korsa
+                                        <div class="dropdown no-caret">
+                                            <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
+                                            <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#!">
+                                                    <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="list"></i></div>
+                                                    Detail
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="small">
+                                            Utama
+                                            <span class="float-end fw-bold">{{korsa_utama}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{korsa_utama}}%" aria-valuenow="{{korsa_utama}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            Niaga
+                                            <span class="float-end fw-bold">{{korsa_niaga}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{korsa_niaga}}%" aria-valuenow="{{korsa_niaga}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            Operasi
+                                            <span class="float-end fw-bold">{{korsa_operasi}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar" role="progressbar" style="width: {{korsa_operasi}}%" aria-valuenow="{{korsa_operasi}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            Pengelolaan Prasarana
+                                            <span class="float-end fw-bold">{{korsa_prasarana}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: {{korsa_prasarana}}%" aria-valuenow="{{korsa_prasarana}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            Keselamatan & Keamanan
+                                            <span class="float-end fw-bold">{{korsa_keselamatan}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: {{korsa_keselamatan}}%" aria-valuenow="{{korsa_keselamatan}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            SDM & Umum
+                                            <span class="float-end fw-bold">{{korsa_SDM}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{korsa_SDM}}%" aria-valuenow="{{korsa_SDM}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            Perencanaan Strategis dan Pengembangan  Usaha
+                                            <span class="float-end fw-bold">{{korsa_perencanaan}}%</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{korsa_perencanaan}}%" aria-valuenow="{{korsa_perencanaan}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="small">
+                                            Keuangan
+                                            <span class="float-end fw-bold">{{korsa_keuangan}}</span>
+                                        </h4>
+                                        <div class="progress mb-4">
+                                            <div class="progress-bar" role="progressbar" style="width: {{korsa_keuangan}}%" aria-valuenow="{{korsa_keuangan}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END OF ESI OVERALL COMPANY - PER BIDANG JABATAN / KORSA -->
+                        </div>
+                        <!-- end of row -->
+                        <!-- start row -->
+                        <div class="row">                       
+                    </main>
+                        <!-- end row -->
+                        <!-- Example DataTable for Dashboard Demo-->
+                        <footer class="footer-admin mt-auto footer-light">
+                            <div class="container-xl px-4">
+                                <div class="row">
+                                    <div class="col-md-6 small">Copyright &copy; Your Website 2021</div>
+                                    <div class="col-md-6 text-md-end small">
+                                        <a href="#!">Privacy Policy</a>
+                                        &middot;
+                                        <a href="#!">Terms &amp; Conditions</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+            </div>
+        </div>
+        <!-- <script src="{% static 'kuesioner/js/scripts.js' %}"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="{% static 'kuesioner/assets/demo/chart-area-demo.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- JavaScript code -->
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="{% static 'kuesioner/js/datatables/datatables-simple-demo.js' %}"></script>
+        <script src="{% static 'kuesioner/js/litepicker.js' %}"></script>
+        <script src="{% static 'js/scripts.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
+        <script>
+            // Set new default font family and font color to mimic Bootstrap's default styling
+            (Chart.defaults.global.defaultFontFamily = "Metropolis"),
+            "-apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif";
+            Chart.defaults.global.defaultFontColor = "#858796";
+
+            // Pie Chart Example
+            var ctx = document.getElementById("myPieChart");
+            var femaleCount = {{ female_count }};
+            var maleCount = {{ male_count }};
+            var totalCount = femaleCount + maleCount;
+            var femalePercentage = (femaleCount / totalCount) * 100;
+            var malePercentage = (maleCount / totalCount) * 100;
+
+            var myPieChart = new Chart(ctx, {
+            type: "doughnut",
+            data: {
+                labels: ["Perempuan", "Laki Laki"],
+                datasets: [
+                {
+                    data: [femaleCount, maleCount],
+                    backgroundColor: ["rgba(255, 20, 147, 1)", "rgba(0, 97, 242, 1)"],
+                    hoverBackgroundColor: ["rgba(0, 97, 242, 0.9)", "rgba(0, 172, 105, 0.9)"],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                },
+                ],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                backgroundColor: "rgb(255,255,255)",
+                bodyFontColor: "#858796",
+                borderColor: "#dddfeb",
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: false,
+                caretPadding: 10,
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                    var dataset = data.datasets[tooltipItem.datasetIndex];
+                    var currentValue = dataset.data[tooltipItem.index];
+                    var percentage = parseFloat(
+                        ((currentValue / totalCount) * 100).toFixed(2)
+                    );
+                    return (
+                        data.labels[tooltipItem.index] +
+                        ": " +
+                        currentValue +
+                        " (" +
+                        percentage +
+                        "%)"
+                    );
+                    },
+                },
+                },
+                legend: {
+                display: false,
+                },
+                cutoutPercentage: 80,
+            },
+            });
+        </script>
+        <script>
+            // Retrieve the values of female_count and male_count from your data source
+            var femaleCount = {{ female_count }};
+            var maleCount = {{ male_count }};
+            
+            // Calculate the total count
+            var totalCount = femaleCount + maleCount;
+            
+            // Calculate the percentage for females and males
+            var femalePercentage = (femaleCount / totalCount) * 100;
+            var malePercentage = (maleCount / totalCount) * 100;
+            
+            // Update the content of the HTML elements with the calculated values
+            document.getElementById("femaleCount").textContent = femaleCount + " (" + femalePercentage.toFixed(2) + "%)";
+            document.getElementById("maleCount").textContent = maleCount + " (" + malePercentage.toFixed(2) + "%)";
+        </script>
+        <script>
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = "'Metropolis', '-apple-system', 'system-ui', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif";
+        Chart.defaults.global.defaultFontColor = "#858796";
+
+        function number_format(number, decimals, dec_point, thousands_sep) {
+            // Function implementation here
+            // ...
+        }
+
+        // Bar Chart Example
+        var ctx = document.getElementById("myBarChart");
+        var myBarChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: ["SD", "SLTP", "SLTA", "Diploma", "Sarjana", "Pasca Sarjana"],
+                datasets: [{
+                    label: "Education Count",
+                    backgroundColor: "rgba(0, 97, 242, 1)",
+                    hoverBackgroundColor: "rgba(0, 97, 242, 0.9)",
+                    borderColor: "#4e73df",
+                    data: [
+                        {{ education_SD }},
+                        {{ education_SLTP }},
+                        {{ education_SLTA }},
+                        {{ education_Diploma }},
+                        {{ education_Sarjana }},
+                        {{ education_Pasca_Sarjana }}
+                    ],
+                    maxBarThickness: 25
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: "month"
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 6
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            min: 0,  // Specify the minimum value for the y-axis
+                            max: {{ total_count }},  // Specify the maximum value for the y-axis
+                            stepSize: 10  // Specify the interval between ticks
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Jumlah Peserta"
+                        }
+                    }]
+                },
+                legend: {
+                display: false 
+            }
+        }
+        });
+        </script>
+        <script>
+            var subtraction = 1000 - {{ total_count }};
+
+        // Update the HTML element with the subtraction result
+        document.getElementById("subtractionResult").textContent = subtraction.toString();
+        </script>
+        <script>
+            var total_participant = 1000;
+
+                // Perform the percentage calculation
+                var percentage = ({{total_count}} / total_participant) * 100;
+
+                // Update the HTML element with the percentage result
+                document.getElementById("percentageResult").textContent = percentage.toFixed(2) + "%";
+        </script>
+        <script>
+            // Example birthdates array (YYYY-MM-DD format)
+            var birthdates = [
+                {% for birthday in birthday_list %}
+                    "{{ birthday }}",
+                {% endfor %}
+                // Add more birthdates as needed
+            ];
+
+            // Calculate the age and distribution for each age group
+            var currentDate = new Date();
+            var genXCount = 0;
+            var genYCount = 0;
+            var genZCount = 0;
+
+            birthdates.forEach(function (birthdate) {
+                var birthDate = new Date(birthdate);
+                var age = currentDate.getFullYear() - birthDate.getFullYear();
+
+                if (
+                    currentDate.getMonth() < birthDate.getMonth() ||
+                    (currentDate.getMonth() === birthDate.getMonth() &&
+                        currentDate.getDate() < birthDate.getDate())
+                ) {
+                    age--;
+                }
+
+                if (age >= 39 && age <= 54) {
+                    genXCount++;
+                } else if (age >= 25 && age <= 38) {
+                    genYCount++;
+                } else if (age < 24) {
+                    genZCount++;
+                }
+            });
+
+            var totalCount = birthdates.length;
+            var genXPercentage = (genXCount / totalCount) * 100;
+            var genYPercentage = (genYCount / totalCount) * 100;
+            var genZPercentage = (genZCount / totalCount) * 100;
+
+            // Update the HTML elements with the percentage values
+            document.getElementById("genXPercentage").textContent = genXPercentage.toFixed(2) + "%";
+            document.getElementById("genYPercentage").textContent = genYPercentage.toFixed(2) + "%";
+            document.getElementById("genZPercentage").textContent = genZPercentage.toFixed(2) + "%";
+        </script>
+        <script>
+            var ctx = document.getElementById("myPieChart1");
+            var myPieChart = new Chart(ctx, {
+            type: "doughnut",
+            data: {
+                labels: ["Gen X", "Gen Y", "Gen Z"], // Labels for the pie chart sections
+                datasets: [
+                {
+                    data: [genXPercentage, genYPercentage, genZPercentage], // Use the calculated percentages from previous code
+                    backgroundColor: [
+                    "rgba(0, 170, 0, 1)",
+                    "rgba(255, 130, 0, 1)",
+                    "rgba(0, 0, 255, 1)",
+                    ],
+                    hoverBackgroundColor: [
+                    "rgba(0, 97, 242, 0.9)",
+                    "rgba(0, 172, 105, 0.9)",
+                    "rgba(88, 0, 232, 0.9)",
+                    ],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                },
+                ],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                backgroundColor: "rgb(255,255,255)",
+                bodyFontColor: "#858796",
+                borderColor: "#dddfeb",
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: false,
+                caretPadding: 10,
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                    var label = data.labels[tooltipItem.index] || "";
+                    var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                    return label + ": " + value + "%";
+                    },
+                },
+                },
+                legend: {
+                display: false,
+                },
+                cutoutPercentage: 80,
+            },
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+        <script src="{% static 'kuesioner/js/litepicker.js' %}"></script>
+        <script src="{% static 'kuesioner/js/scripts.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script>
+            // Get the positions data
+            const positions = [
+                {% for position in positions %}
+                    { position: "{{ position.position }}", count: {{ position.count }} },
+                {% endfor %}
+            ];
+        
+            // Create a global variable for the chart
+            let chart;
+        
+            // Function to update the chart and scroll to the chart element
+            function updateChart(locationId) {
+                // Filter the positions data based on the location
+                let filteredPositions;
+                if (locationId === 'all') {
+                    filteredPositions = positions;
+                } else {
+                    filteredPositions = positions.filter(position => position.locationId === locationId);
+                }
+        
+                // Extract labels and counts from the filtered positions data
+                const labels = filteredPositions.map(position => position.position);
+                const counts = filteredPositions.map(position => position.count);
+        
+                // Update the chart data
+                chart.data.labels = labels;
+                chart.data.datasets[0].data = counts;
+                chart.update();
+        
+                // Scroll to the chart element
+                const chartElement = document.getElementById('myHorizontalBarChart');
+                chartElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        
+            // Function to create the initial chart
+            function createChart() {
+                // Extract position labels and counts from the positions data
+                const labels = positions.map(position => position.position);
+                const counts = positions.map(position => position.count);
+        
+                // Calculate the total number of users
+                const totalUsers = counts.reduce((acc, count) => acc + count, 0);
+        
+                // Create the chart
+                const ctx = document.getElementById("myHorizontalBarChart").getContext("2d");
+                chart = new Chart(ctx, {
+                    type: "horizontalBar",
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: counts,
+                            backgroundColor: "rgba(0, 97, 242, 1)",
+                            hoverBackgroundColor: "rgba(0, 97, 242, 0.9)",
+                            borderColor: "#4e73df",
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            xAxes: [{
+                                time: {
+                                    unit: "month"
+                                },
+                                gridLines: {
+                                    display: false,
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    min: 0,
+                                    max: totalUsers,
+                                    maxTicksLimit: 10
+                                }
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    min: 0,
+                                    max: totalUsers,
+                                    stepSize: 1
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: "Tingkat Jabatan"
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        }
+                    }
+                });
+            }
+        
+            // Call the createChart function to initialize the chart
+            document.addEventListener("DOMContentLoaded", createChart);
+        </script>                        
+    </body>
+</html>

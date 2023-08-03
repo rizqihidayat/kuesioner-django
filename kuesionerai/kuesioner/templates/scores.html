@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Score Differences</title>
+</head>
+<body>
+    <h1>Score Differences</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Dimension ID</th>
+                <th>Question ID</th>
+                <th>Score Difference</th>
+                <th>Average Score Difference</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for score in scores %}
+            <tr>
+                <td>{{ score.dimensi }}</td>
+                <td>{{ score.question_id }}</td>
+                <td>{{ score.score_difference }}</td>
+                <td>{{ score.average_score_difference }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

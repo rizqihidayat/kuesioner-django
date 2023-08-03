@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Terima Kasih - Soluntika</title>
+    <link href="{% static 'kuesioner/css/styles.css' %}" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="{% static 'kuesioner/assets/img/soluntika-kecil.png' %}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-top: 50px; /* Add some padding at the bottom for better visibility */
+        }
+
+        .content {
+            margin-top: auto; /* Push the content to the top */
+            margin-bottom: auto; /* Push the content to the bottom */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="logo">
+            <img src="{% static 'kuesioner/assets/img/soluntika-kecil.png' %}" alt="Soluntika Logo">
+            <span>Soluntika - Kuesioner</span>
+        </div>
+        <h1>Terima kasih</h1>
+        <p>Terima kasih atas kesediaan Anda mengisi kuesioner.</p>
+        <p>Respons Anda telah berhasil direkam.</p>
+    
+        <a href="{% url 'profile' %}" class="btn btn-primary">Kembali ke Profil</a>
+    </div>
+
+    <script src="{% static 'kuesioner/js/scripts.js' %}"></script>
+</body>
+</html>

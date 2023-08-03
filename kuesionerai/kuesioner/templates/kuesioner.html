@@ -1,0 +1,27 @@
+<!-- questionnaire.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Questionnaire</title>
+</head>
+<body>
+    <h1>Questionnaire</h1>
+
+    {% if question %}
+        <form method="post" action="{% url 'kuesioner' %}">
+            {% csrf_token %}
+            <h2>{{ question.pertanyaan }}</h2>
+
+            {% for answer in answers %}
+                <input type="radio" id="answer_{{ answer.id }}" name="answer" value="{{ answer.id }}">
+                <label for="answer_{{ answer.id }}">{{ answer.answer }}</label><br>
+            {% endfor %}
+
+            <button type="submit">Next</button>
+        </form>
+    {% else %}
+        <p>Thank you for completing the questionnaire!</p>
+    {% endif %}
+</body>
+</html>

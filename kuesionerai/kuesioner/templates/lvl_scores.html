@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Level Scores</title>
+</head>
+<body>
+    <h1>Level Scores</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Level Kepuasan</th>
+                <th>Total Score (Level Kepentingan)</th>
+                <th>Total Score (Level Kepuasan)</th>
+                <th>Score Difference</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for score in scores %}
+            <tr>
+                <td>{{ score.lvl_kepuasan }}</td>
+                <td>{{ score.total_score_lvl_kepentingan }}</td>
+                <td>{{ score.total_score_lvl_kepuasan }}</td>
+                <td>{{ score.score_difference }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
